@@ -1,3 +1,4 @@
+const { fetchSymbols } = require('../../common/services/exchange.service');
 const { convert, fetchStatistics } = require('../services/conversion.service');
 
 const getConversion = async (req, res) => {
@@ -16,6 +17,15 @@ const getStatistics = async (req, res) => {
   } catch (err){
     res.status(500).send(err);
   }
-}
+};
 
-module.exports = { getConversion, getStatistics }
+const getSymbols = async (req, res) => {
+  try {
+    const symbols = await fetchSymbols();
+    res.status(200).send(symbols);
+  } catch (err){
+    res.status(500).send(err);
+  }
+};
+
+module.exports = { getConversion, getStatistics, getSymbols }

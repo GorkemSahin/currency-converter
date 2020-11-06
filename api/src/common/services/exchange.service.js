@@ -8,4 +8,9 @@ const fetchRates = async (from, to) => {
   return { to: resp.data.rates[to], usd: resp.data.rates["USD"] };
 }
 
-module.exports = fetchRates;
+const fetchSymbols = async () => {
+  const resp = await axiosInstance.get('/latest');
+  return Object.keys(resp.data.rates);
+}
+
+module.exports = { fetchRates, fetchSymbols };

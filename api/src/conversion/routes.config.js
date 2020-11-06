@@ -1,8 +1,10 @@
-const { getStatistics, getConversion } = require('./controllers/conversion.controller');
+const { getStatistics, getConversion, getSymbols } = require('./controllers/conversion.controller');
 
 exports.routesConfig = function (app) {
   
-  app.get('/conversion', [ getConversion ]);
+  app.get('/conversion/convert', [ getConversion ]);
 
   app.get('/conversion/statistics', [ getStatistics ]);
+
+  app.get('/conversion/symbols', [ getSymbols ])
 };
