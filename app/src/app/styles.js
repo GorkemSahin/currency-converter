@@ -1,34 +1,14 @@
 const styles = {
-  container: {
+  layout: {
+    minHeight: "100vh"
+  },
+  content: {
     display: "flex",
-    flex: 1,
     flexDirection: "column",
-    alignItems: "center"
+    minHeight: 500 
   },
-  innerContainer: {
-    display: "flex",
-    flex: 1,
-    flexDirection: "column",
-    maxWidth: 600
-  },
-  currenciesContainer: {
-    display: "flex",
-    flex: 3
-  },
-  columnContainer: {
-    display: "flex",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  input: {
-    minWidth: 100
-  },
-  resultContainer: {
-    display: "flex",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+  footer: {
+    textAlign: 'center'
   }
 }
 
