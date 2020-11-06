@@ -13,7 +13,7 @@ const styles = {
   },
   currenciesContainer: {
     display: "flex",
-    flex: 3
+    flex: 1
   },
   columnContainer: {
     display: "flex",

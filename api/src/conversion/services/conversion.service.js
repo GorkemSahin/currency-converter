@@ -1,5 +1,5 @@
 const Conversion = require( "../models/conversion.model");
-const fetchRates = require("../../common/services/exchange.service");
+const { fetchRates } = require("../../common/services/exchange.service");
 
 const convert = async ({ from, to, amount }) => {
   const rates = await fetchRates(from, to);

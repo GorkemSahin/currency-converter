@@ -1,16 +1,20 @@
-import {createStore, applyMiddleware, combineReducers} from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import {all} from 'redux-saga/effects';
+import { all } from 'redux-saga/effects';
 import { symbolReducer } from './symbols/reducer';
 import { symbolSagas } from './symbols/sagas';
+import { statisticsReducer } from './symbols/reducer';
+import { statisticsSagas } from './symbols/sagas';
 
 const reducer = combineReducers({
-  symbols: symbolReducer
+  symbols: symbolReducer,
+  statistics: statisticsReducer
 });
 
 function* allSagas() {
   yield all([
-    ...symbolSagas
+    ...symbolSagas,
+    statisticsSagas
   ]);
 }
 

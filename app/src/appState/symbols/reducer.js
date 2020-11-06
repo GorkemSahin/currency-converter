@@ -6,7 +6,7 @@ import {
 export const symbolReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SYMBOLS:
-      return [ ...state, ...action.symbols ];
+      return action.symbols;
     default:
       return state;
   }
