@@ -3,8 +3,8 @@ import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 import { symbolReducer } from './symbols/reducer';
 import { symbolSagas } from './symbols/sagas';
-import { statisticsReducer } from './symbols/reducer';
-import { statisticsSagas } from './symbols/sagas';
+import { statisticsReducer } from './statistics/reducer';
+import { statisticsSagas } from './statistics/sagas';
 
 const reducer = combineReducers({
   symbols: symbolReducer,

@@ -16,6 +16,6 @@ function* watchFetchStatistics() {
   yield takeLeading(FETCH_STATISTICS, fetchStatistics);
 }
 
-export const symbolSagas = [
+export const statisticsSagas = [
   watchFetchStatistics()
 ];
