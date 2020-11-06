@@ -1,9 +1,10 @@
 const Conversion = require( "../models/conversion.model");
+const fetchRates = require("../../common/services/exchange.service");
 
-const convert = async (conversionData) => {
-  conversionDataWithResult = { ...conversionData,
-    result: conversionData.amount*2, usdResult: conversionData.amount*3 }
-  return await Conversion.create(conversionDataWithResult);
+const convert = async ({ from, to, amount }) => {
+  const rates = await fetchRates(from, to);
+  const conversion = { from, to, amount, result: amount*rates.to, usdResult: amount*rates.usd};
+  return await Conversion.create(conversion);
 }
 
 const fetchStatistics = async ( ) => {
@@ -12,7 +13,7 @@ const fetchStatistics = async ( ) => {
         "_id": null,
         "usdTotal": { "$sum": "$usdResult" }
     }}
-  ])
+  ]);
 }
 
 module.exports = { convert, fetchStatistics }

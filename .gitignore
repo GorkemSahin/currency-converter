@@ -3,3 +3,4 @@ app/.DS_Store
 app/node_modules/*
 api/node_modules/*
 app/package-lock.json
+api/package-lock.json

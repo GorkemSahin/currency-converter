@@ -1,8 +1,8 @@
-const { insert, getStatistics } = require('./controllers/conversion.controller');
+const { getStatistics, getConversion } = require('./controllers/conversion.controller');
 
 exports.routesConfig = function (app) {
   
-  app.post('/conversion', [ insert ]);
+  app.get('/conversion', [ getConversion ]);
 
   app.get('/conversion/statistics', [ getStatistics ]);
 };
