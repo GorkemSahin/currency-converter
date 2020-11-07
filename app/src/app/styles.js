@@ -5,10 +5,16 @@ const styles = {
   content: {
     display: "flex",
     flexDirection: "column",
-    minHeight: 500 
+    minHeight: 500
   },
   footer: {
     textAlign: 'center'
+  },
+  errorContainer: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 }
 

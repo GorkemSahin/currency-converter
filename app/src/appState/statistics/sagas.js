@@ -3,12 +3,12 @@ import { takeLeading, put } from '@redux-saga/core/effects';
 import { FETCH_STATISTICS } from './constants';
 import { setStatisticsAction } from './actions';
 
-function* fetchStatistics() {
+function* fetchStatistics(action) {
   try {
     const resp = yield api.fetchStatistics();
-    console.log(resp)
     yield put(setStatisticsAction(resp.data));
   } catch (e) {
+    if (action.onFail) action.onFail();
     yield put(setStatisticsAction([]));
   }
 }

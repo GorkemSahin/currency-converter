@@ -3,9 +3,10 @@ import {
   SET_STATISTICS
 } from './constants';
 
-export const fetchStatisticsAction = () => {
+export const fetchStatisticsAction = (onFail) => {
   return {
     type: FETCH_STATISTICS,
+    onFail
   };
 };
 

@@ -9,21 +9,24 @@ const styles = {
     display: "flex",
     flex: 1,
     flexDirection: "column",
-    maxWidth: 600
+    maxWidth: 600,
+    width: "100%"
   },
   currenciesContainer: {
     display: "flex",
-    flex: 1
+    flex: 1,
+    width: "100%"
   },
   columnContainer: {
     display: "flex",
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "column"
+    flexDirection: "column",
+    padding: 5
   },
   input: {
-    minWidth: 100
+    width: "100%"
   },
   resultContainer: {
     display: "flex",

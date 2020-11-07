@@ -3,9 +3,10 @@ import {
   SET_SYMBOLS
 } from './constants';
 
-export const fetchSymbolsAction = () => {
+export const fetchSymbolsAction = (onFail) => {
   return {
     type: FETCH_SYMBOLS,
+    onFail
   };
 };
 

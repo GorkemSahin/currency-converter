@@ -11,8 +11,9 @@ const convert = async ({ from, to, amount }) => {
   const rates = await fetchRates(from, to);
   const conversion = {
     from, to, amount,
-    result: truncate(amount*rates.to, 3),
-    usdResult: truncate(amount*rates.usd, 3)};
+    result: truncate(amount*rates.to, 2),
+    usdResult: truncate(amount*rates.usd, 2)
+  };
   return await createAndSaveConversion(conversion);
 }
 

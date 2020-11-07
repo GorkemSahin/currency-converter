@@ -8,6 +8,7 @@ function* fetchSymbols(action) {
     const resp = yield api.fetchSymbols();
     yield put(setSymbolsAction(resp.data));
   } catch (e) {
+    if (action.onFail) action.onFail();
     yield put(setSymbolsAction([]));
   }
 }
