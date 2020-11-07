@@ -9,6 +9,7 @@ const styles = {
     display: "flex",
     flex: 1,
     flexDirection: "row",
+    justifyContent: "space-around",
     maxWidth: 600
   },
   statisticContainer: {
@@ -17,7 +18,8 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
-    minWidth: 150
+    textAlign: "center",
+    minWidth: 200
   }
 }
 

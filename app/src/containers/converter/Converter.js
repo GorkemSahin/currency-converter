@@ -7,15 +7,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchSymbolsAction } from '../../appState/symbols/actions';
 import { symbolsAsOptionsSelector } from '../../appState/symbols/selectors';
 import api from '../../api'
-import truncater from '../../utils/decimalTruncater';
 const { Title } = Typography;
 
-export default function Converter ({ style }) {
+export default function Converter ({ setRefresh, style }) {
 
   const dispatch = useDispatch();
   useEffect(()=> {
-    dispatch(fetchSymbolsAction())
-  }, []);
+    dispatch(fetchSymbolsAction());
+  }, [dispatch]);
   const symbols = useSelector(symbolsAsOptionsSelector);
 
   const [from, setFrom] = useState();
@@ -28,11 +27,12 @@ export default function Converter ({ style }) {
     if (from && to && amount){
       setLoading(true);
       api.fetchConversion({ from, to, amount }).then(resp => {
-        setResult(truncater(resp.data.result, 3))
-        setLoading(false)
+        setResult(resp.data.result);
+        setLoading(false);
+        setRefresh({ })
       });
     }
-  }, [from, to, amount]);
+  }, [from, to, amount, setRefresh]);
 
   return (
     <div style={{ ...styles.container, ...style }}>
@@ -48,7 +48,7 @@ export default function Converter ({ style }) {
             <Select placeholder="To" onSelect={ setTo } showSearch style={ styles.input }>{symbols}</Select>
           </div>
           <div style={ styles.columnContainer }>
-          <Button loading={loading} onClick={ getResult }>CONVERT</Button>
+            <Button loading={loading} onClick={ getResult }>CONVERT</Button>
           </div>
         </div>
         <div style={ styles.resultContainer }>

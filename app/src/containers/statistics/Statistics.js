@@ -1,28 +1,33 @@
-import { Select, Input } from 'antd';
 import { Typography } from 'antd';
 import 'antd/dist/antd.css';
+import { useEffect, useMemo } from 'react';
 import styles from './styles';
-const { Option } = Select;
-const { Title } = Typography;
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchStatisticsAction } from '../../appState/statistics/actions';
+import { statisticsSelector } from '../../appState/statistics/selectors';
+const { Title, Text } = Typography;
 
-export default function Converter ({ style }) {
-  const data = [ { value: "TR", text: "TR "}, { value: "EUR", text: "EUR "},{ value: "ABC", text: "BCD "},{ value: "ABC", text: "BCD "},]
-  const options = data.map(d => <Option key={d.value}>{d.text}</Option>);
+export default function Converter ({ refresh, style }) {
+
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(fetchStatisticsAction()), [refresh, dispatch]);
+
+  const statistics = useSelector(statisticsSelector);
+
+  const statisticComponents = useMemo(
+    () => statistics.map((s) => (
+        <div key={ s.statistic } style={ styles.statisticContainer }>
+          <Text>{ s.statistic }</Text>
+          <Title level={2}>{ s.value }</Title>
+        </div>
+    )),
+    [statistics]
+  );
+  
   return (
     <div style={{ ...styles.container, ...style }}>
       <div style={ styles.innerContainer }>
-        <div style={ styles.statisticContainer }>
-          <Title level={5}>Statistic</Title>
-          <Title level={2}>Data</Title>
-        </div>
-        <div style={ styles.statisticContainer }>
-          <Title level={5}>Statistic</Title>
-          <Title level={2}>Data</Title>
-        </div>
-        <div style={ styles.statisticContainer }>
-          <Title level={5}>Statistic</Title>
-          <Title level={2}>Data</Title>
-        </div>
+        { statisticComponents }
       </div>
     </div>
   );

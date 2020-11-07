@@ -8,4 +8,8 @@ const fetchConversion = async (query) => {
   return await axiosInstance.get(`/conversion/convert`, { params: query });
 };
 
-export default { fetchSymbols, fetchConversion };
+const fetchStatistics = async () => {
+  return await axiosInstance.get(`/conversion/statistics`);
+};
+
+export default { fetchSymbols, fetchConversion, fetchStatistics };

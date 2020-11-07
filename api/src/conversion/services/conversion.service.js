@@ -1,19 +1,30 @@
-const Conversion = require( "../models/conversion.model");
+const {
+  createAndSaveConversion,
+  getTotalAmountOfConversions,
+  getMostPopularCurrency,
+  getNoOfConversions
+} = require( "../repository/conversion.repository");
+const truncate = require('../../common/utils/decimal.utils');
 const { fetchRates } = require("../../common/services/exchange.service");
 
 const convert = async ({ from, to, amount }) => {
   const rates = await fetchRates(from, to);
-  const conversion = { from, to, amount, result: amount*rates.to, usdResult: amount*rates.usd};
-  return await Conversion.create(conversion);
+  const conversion = {
+    from, to, amount,
+    result: truncate(amount*rates.to, 3),
+    usdResult: truncate(amount*rates.usd, 3)};
+  return await createAndSaveConversion(conversion);
 }
 
-const fetchStatistics = async ( ) => {
-  return await Conversion.aggregate([
-    { "$group": {
-        "_id": null,
-        "usdTotal": { "$sum": "$usdResult" }
-    }}
-  ]);
+const prepareStatistics = async ( ) => {
+  const noOfConversions = await getNoOfConversions();
+  const totalAmount = await getTotalAmountOfConversions();
+  const mostPopularCurrency = await getMostPopularCurrency();
+  return [
+    { statistic: "Total Amount Converted", value: truncate(totalAmount, 0) + " USD" },
+    { statistic: "Number of Conversions", value: noOfConversions },
+    { statistic: "Most Popular Currency", value: mostPopularCurrency }
+  ];
 }
 
-module.exports = { convert, fetchStatistics }
+module.exports = { convert, prepareStatistics }

@@ -9,9 +9,9 @@ export const fetchStatisticsAction = () => {
   };
 };
 
-export const setStatisticsAction = (symbols) => {
+export const setStatisticsAction = (statistics) => {
   return {
     type: SET_STATISTICS,
-    symbols
+    statistics
   };
 };

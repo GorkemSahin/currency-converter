@@ -14,7 +14,7 @@ const reducer = combineReducers({
 function* allSagas() {
   yield all([
     ...symbolSagas,
-    statisticsSagas
+    ...statisticsSagas
   ]);
 }
 
