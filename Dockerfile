@@ -6,4 +6,6 @@ COPY app ./
 
 RUN npm install && cd server && npm install
 
+EXPOSE 3000
+
 CMD npm start
