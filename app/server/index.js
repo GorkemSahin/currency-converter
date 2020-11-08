@@ -4,9 +4,13 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require("cors");
 const ConversionsRouter = require('./src/conversion/routes.config');
+const path = require("path");
 
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname, "..", "build")));
+app.use(express.static("public"));
 
 ConversionsRouter.routesConfig(app);
 
