@@ -3,7 +3,7 @@ import { Layout, Divider, PageHeader } from 'antd';
 import Converter from '../containers/converter/Converter';
 import Statistics from '../containers/statistics/Statistics';
 import styles from './styles';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import Title from 'antd/lib/typography/Title';
 import { fetchSymbolsAction } from '../appState/symbols/actions';
@@ -17,9 +17,11 @@ export default function App () {
   const [refresh, setRefresh] = useState(); 
   const [error, setError] = useState(false);
 
+  const onFail = useCallback(() => setError(true), []);
+
   useEffect(()=> {
-    dispatch(fetchSymbolsAction(() => { setError(true) }));
-  }, [dispatch]);
+    dispatch(fetchSymbolsAction(onFail));
+  }, [dispatch, onFail]);
 
   return (
     <Layout style={ styles.layout }>
@@ -30,9 +32,9 @@ export default function App () {
         </div>
         :
         <Content style={ styles.content }>
-          <Converter setRefresh={ setRefresh} />
+          <Converter onFail={ onFail } setRefresh={ setRefresh} />
           <Divider></Divider>
-          <Statistics refresh={ refresh } setError={ setError }/>
+          <Statistics refresh={ refresh }/>
         </Content>
       }
       <Footer style={ styles.footer }>A simple currency converter app developed by Görkem Şahin.</Footer>

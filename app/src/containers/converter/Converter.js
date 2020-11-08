@@ -8,7 +8,7 @@ import { symbolsAsOptionsSelector } from '../../appState/symbols/selectors';
 import api from '../../api'
 const { Title } = Typography;
 
-export default function Converter ({ setRefresh, style }) {
+export default function Converter ({ setRefresh, onFail, style }) {
 
   const symbols = useSelector(symbolsAsOptionsSelector);
   const [from, setFrom] = useState();
@@ -18,17 +18,23 @@ export default function Converter ({ setRefresh, style }) {
   const [result, setResult] = useState();
   const [loading, setLoading] = useState(false);
 
-  const getResult = useCallback(() => {
+  const getResult = useCallback(async () => {
     if (from && to && amount){
       setLoading(true);
-      api.fetchConversion({ from, to, amount }).then(resp => {
-        setResult(resp.data.result);
-        setLoading(false);
+      try {
+        const { data: { result } } = await api.fetchConversion({ from, to, amount })
+        setResult(result);
         setToOnDisplay(to);
-        setRefresh({ }) // Passing a new object to trigger the useEffect in the statistics container
-      });
+        if (setRefresh) setRefresh({ }) // Passing a new object to trigger the useEffect in the statistics container
+      } catch (error) {
+        setToOnDisplay(null);
+        setResult(null);
+        if (onFail) onFail();
+      } finally {
+        setLoading(false);
+      }
     }
-  }, [from, to, amount, setRefresh]);
+  }, [from, to, amount, setRefresh, onFail]);
 
   return (
     <div style={{ ...styles.container, ...style }}>
