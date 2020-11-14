@@ -24,8 +24,6 @@ Statistics and currency symbols were used in only one container here, so it didn
 
 I wanted to implement navigation too but I couldn’t find a good excuse to create another screen, so I left the router usage out. :)
 
-I like to separate dummy components without any built-in functionality and components that fetch data, interact with app state etc. in containers and components folders, respectively. For this application I used a 3rd party library for styling and didn’t feel the need to create dummy components.
-
 ##### I was asked to “Write down any significant problems you encountered. Let us know how you solved them or how would you tackle them if you had more time” so here we go:
 
 ### What I struggled with
@@ -40,12 +38,8 @@ I picked MongoDB Atlas to persist data because it provided easy access on the cl
 
 I’d create a carousel component to display statistics. That way I could ensure that all statistics could be displayed in a responsive way no matter how many, and this would render the whole app more scalable.
 
-I’d implement a middleware in the back-end to log errors in ways that’d make tracking them down easier. I’d also implement a more sophisticated error handling in the front-end.
-
 I’d style the front-end manually instead of using a 3rd party library. Since the task description did not include a lot of details for the front-end I didn’t invest much in design and styling. I was only concerned with usability and responsiveness.
 
 Instead of using hard-coded strings, I’d use i18n to provide support for local languages.
 
 I’d set up constant distance values and use those throughout the whole application instead of using hard coded values for padding, margin… etc. for a more consistent look overall.
-
-I feel like I could shrink the size of the Docker image by quite a bit. I didn’t have any professional work environment with Docker yet, so my knowledge was limited with my individual experimentations.
