@@ -19,7 +19,7 @@ export default function Converter ({ setRefresh, onFail, style }) {
   const [loading, setLoading] = useState(false);
 
   const getResult = useCallback(async () => {
-    if (from && to && amount){
+    if (from && to && amount > 0){
       setLoading(true);
       try {
         const { data: { result } } = await api.fetchConversion({ from, to, amount })
@@ -29,7 +29,7 @@ export default function Converter ({ setRefresh, onFail, style }) {
       } catch (error) {
         setToOnDisplay(null);
         setResult(null);
-        if (onFail) onFail();
+        if (onFail) onFail(error);
       } finally {
         setLoading(false);
       }
@@ -62,16 +62,17 @@ export default function Converter ({ setRefresh, onFail, style }) {
           </div>
         </div>
         <div style={ styles.resultContainer }>
-          { result ? <div>
-            <Space>
-              <Title level={1}>{ result }</Title>
-              <Title level={3}>{ toOnDisplay }</Title>            
-            </Space>
-          </div>
-          :
-          <div>
-            <Title level={5}>Please make a conversion.</Title>
-          </div> }
+          {
+            result ? <div>
+              <Space>
+                <Title level={1}>{ result }</Title>
+                <Title level={3}>{ toOnDisplay }</Title>            
+              </Space>
+            </div>
+            : <div>
+              <Title level={5}>Please make a conversion.</Title>
+            </div>
+          }
         </div>
       </div>
     </div>

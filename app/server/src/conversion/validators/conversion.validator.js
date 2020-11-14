@@ -15,9 +15,10 @@ const validate = (req, res, next) => {
   }
   const extractedErrors = []
   errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
-  return res.status(422).json({
-    errors: extractedErrors,
-  })
+  next({
+    extractedErrors,
+    message: "Validation error. Check your input."
+  });
 }
 
 module.exports = {

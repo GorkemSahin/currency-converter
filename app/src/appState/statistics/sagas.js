@@ -7,8 +7,8 @@ function* fetchStatistics(action) {
   try {
     const resp = yield api.fetchStatistics();
     yield put(setStatisticsAction(resp.data));
-  } catch (e) {
-    if (action.onFail) action.onFail();
+  } catch (error) {
+    if (action.onFail) action.onFail(error);
     yield put(setStatisticsAction([]));
   }
 }
