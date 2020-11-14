@@ -1,4 +1,3 @@
-const config = require('../config/env.config');
 const axiosInstance = require('../utils/axios.utils');
 
 const fetchRates = async (from, to) => {

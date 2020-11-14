@@ -9,12 +9,12 @@ const conversionValidationRules = () => {
 }
 
 const validate = (req, res, next) => {
-  const errors = validationResult(req)
+  const errors = validationResult(req);
   if (errors.isEmpty()) {
-    return next()
+    return next();
   }
-  const extractedErrors = []
-  errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
+  const extractedErrors = [];
+  errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }));
   next({
     extractedErrors,
     message: "Validation error. Check your input."

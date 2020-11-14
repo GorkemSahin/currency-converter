@@ -12,9 +12,12 @@ axiosInstance.interceptors.request.use(
     config.params = { ...config.params } // API KEY can be added as a param here, if needed by another external API
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  },
+  (e) => Promise.reject({ message: e.response.data.error })
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (e) => Promise.reject({ message: e.response.data.error })
 );
 
 module.exports = axiosInstance;
