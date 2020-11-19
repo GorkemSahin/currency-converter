@@ -1,6 +1,6 @@
 # Currency Converter
 
-A small web application I developed using the MERN stack (MongoDB, Express.js, React.js, Node.js). Users can convert from one currency to another and view statistics about the conversions made so far by all users. Notable libraries and tools that were involved are Ant Design, Redux, Saga, Reselect, Axios and Mongoose.
+A small web application I developed using the MERN stack (MongoDB, Express.js, React.js, Node.js). Users can convert from one currency to another and view statistics about the conversions made so far by all users. Notable libraries and tools that were involved are Ant Design, Redux, Saga, Reselect, Axios, Mongoose and Docker.
 
 A brief demonstration of the application can be seen here: https://youtu.be/skysgXo0L_g
 
