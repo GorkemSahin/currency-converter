@@ -1,14 +1,18 @@
+import React from 'react'
 import 'antd/dist/antd.css'
-import { useEffect } from 'react'
-import styles from './styles'
-import Statistic from './components/Statistic/Statistic'
+import { Statistic } from 'types/types'
+import { StatisticItem } from './components/Statistic/Statistic'
 
-export default function Statistics({ refresh, style }) {
+interface Props {
+  statistics?: Statistic[]
+}
+
+export default function Statistics({ statistics }: Props) {
   return (
-    <div style={{ ...styles.container, ...style }}>
-      <div style={styles.innerContainer}>
-        {statistics.map((s) => (
-          <Statistic statistic={s} />
+    <div>
+      <div>
+        {statistics?.map((s) => (
+          <StatisticItem statistic={s} />
         ))}
       </div>
     </div>

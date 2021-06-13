@@ -1,15 +1,16 @@
+import { Conversion, ConversionQuery, Statistic } from 'types/types'
 import axiosInstance from '../utils/axios'
 
-const fetchSymbols = async () => {
-  return await axiosInstance.get(`/conversion/symbols`)
+export const fetchSymbols = async () => {
+  return await axiosInstance.get<string[]>(`/conversion/symbols`)
 }
 
-const fetchConversion = async (query) => {
-  return await axiosInstance.get(`/conversion/convert`, { params: query })
+export const fetchConversion = async (query: ConversionQuery) => {
+  return await axiosInstance.get<Conversion>(`/conversion/convert`, {
+    params: query,
+  })
 }
 
-const fetchStatistics = async () => {
-  return await axiosInstance.get(`/conversion/statistics`)
+export const fetchStatistics = async () => {
+  return await axiosInstance.get<Statistic[]>(`/conversion/statistics`)
 }
-
-export default { fetchSymbols, fetchConversion, fetchStatistics }
