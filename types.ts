@@ -13,3 +13,12 @@ export interface Statistic {
   name: string
   value: string
 }
+
+export interface RateResponse {
+  rates: { [key: string]: number }
+  base: string
+}
+
+export interface SymbolsResponse {
+  [key: string]: number
+}

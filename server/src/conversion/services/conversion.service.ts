@@ -6,22 +6,7 @@ import {
 } from '../repository/conversion.repository'
 import { truncate } from '../../common/utils/decimal.utils'
 import { getRates } from '../../common/services/exchange.service'
-
-interface ConversionQuery {
-  from: string
-  to: string
-  amount: number
-}
-
-export interface Conversion extends ConversionQuery {
-  result: number
-  usdResult: number
-}
-
-interface Statistic {
-  name: string
-  value: number
-}
+import { ConversionQuery, Statistic } from '../../../../types'
 
 export const convert = async ({ from, to, amount }: ConversionQuery) => {
   const rates = await getRates(from, to)

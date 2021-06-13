@@ -1,4 +1,4 @@
-import { Conversion, ConversionQuery, Statistic } from 'types/types'
+import { Conversion, ConversionQuery, Statistic } from '../../../types'
 import axiosInstance from '../utils/axios'
 
 export const fetchSymbols = async () => {

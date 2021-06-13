@@ -4,7 +4,7 @@ import { Button, Divider, Space } from 'antd'
 import Converter from '../containers/conversionForm/ConversionForm'
 import Statistics from '../containers/statistics/Statistics'
 import Title from 'antd/lib/typography/Title'
-import { Conversion, ConversionQuery, Statistic } from 'types/types'
+import { Conversion, ConversionQuery, Statistic } from '../../../types'
 import { postConversion, fetchStatistics, fetchSymbols } from 'api'
 import {
   ContentContainer,

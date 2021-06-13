@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { RateResponse, SymbolsResponse } from '../../../../types'
 import { config } from '../config/env.config'
 
 const axiosInstance = axios.create({
@@ -23,11 +24,9 @@ axiosInstance.interceptors.response.use(
 )
 
 export const fetchRates = async (from: string, to: string, symbols: string) =>
-  await axiosInstance.get('/latest', {
+  await axiosInstance.get<RateResponse>('/latest', {
     params: { base: from, symbols },
   })
 
 export const fetchSymbols = async () =>
-  await axiosInstance.get<{ rates: { [key: string]: number }[]; base: string }>(
-    '/latest'
-  )
+  await axiosInstance.get<SymbolsResponse>('/latest')

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography } from 'antd'
-import { Statistic } from 'types/types'
+import { Statistic } from '../../../../types'
 import {
   StatisticItem,
   StatisticsGrid,

@@ -2,7 +2,7 @@ import React from 'react'
 import { Select, Space, Button, Form, InputNumber } from 'antd'
 import { Typography } from 'antd'
 import 'antd/dist/antd.css'
-import { Conversion, ConversionQuery } from 'types/types'
+import { Conversion, ConversionQuery } from '../../../../types'
 import { Fieldset, FieldsGrid, ResultContainer } from './ConversionForm.styled'
 const { Title } = Typography
 
@@ -27,7 +27,7 @@ export default function Converter({
         <Fieldset>
           <Form.Item name="from" rules={[{ required: true }]}>
             <Select placeholder="From" showSearch>
-              <Select.Option value="EURr">EUR</Select.Option>
+              <Select.Option value="EUR">EUR</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item name="amount" rules={[{ required: true }]}>

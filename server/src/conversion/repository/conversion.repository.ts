@@ -1,5 +1,5 @@
 import ConversionModel from '../models/conversion.model'
-import { Conversion } from '../services/conversion.service'
+import { Conversion } from '../../../../types'
 
 export const createAndSaveConversion = async (conversion: Conversion) => {
   return await ConversionModel.create(conversion)
