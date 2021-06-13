@@ -1,12 +1,12 @@
 const styles = {
   statisticContainer: {
-    display: "flex",
+    display: 'flex',
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-    textAlign: "center"
-  }
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    textAlign: 'center',
+  },
 }
 
-export default styles;
+export default styles

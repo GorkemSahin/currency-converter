@@ -1,25 +1,25 @@
 const styles = {
   container: {
-    display: "flex",
+    display: 'flex',
     flex: 1,
-    flexDirection: "column",
-    alignItems: "center"
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   innerContainer: {
-    display: "flex",
+    display: 'flex',
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%"
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
   },
   statisticContainer: {
-    display: "flex",
+    display: 'flex',
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-    textAlign: "center"
-  }
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    textAlign: 'center',
+  },
 }
 
-export default styles;
+export default styles

@@ -1,21 +1,21 @@
 const styles = {
   layout: {
-    minHeight: "100vh"
+    minHeight: '100vh',
   },
   content: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: 500
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: 500,
   },
   footer: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   errorContainer: {
     flex: 1,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  }
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 }
 
-export default styles;
+export default styles
