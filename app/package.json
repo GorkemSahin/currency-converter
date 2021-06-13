@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start-client": "react-scripts start",
-    "start": "npm run build && (cd ../server && npm start)",
+    "start": "yarn install && yarn build && (cd ../server && yarn install && yarn start)",
     "build": "react-scripts build",
     "fix:prettier": "prettier \"src/**/*.(ts|tsx|js|css|json)\" --write"
   },

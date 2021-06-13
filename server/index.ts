@@ -10,7 +10,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-app.use(express.static(path.join(__dirname, '..', 'build')))
+app.use(express.static(path.join(__dirname, '../app/build')))
 app.use(express.static('public'))
 
 app.use('/conversion', conversionRoutes)
