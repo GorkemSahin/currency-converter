@@ -33,7 +33,7 @@ export default function App() {
       }
     }
     getSymbolsAndStats()
-  }, [])
+  }, [errorMessage])
 
   const onConvert = useCallback(async (query: ConversionQuery) => {
     if (query.from && query.to && query.amount) {
@@ -44,7 +44,6 @@ export default function App() {
         const { data: sData } = await fetchStatistics()
         setStatistics(sData)
       } catch (error) {
-        console.log({ ...error })
         setErrorMessage(error.message || 'Something went wrong.')
       } finally {
         setIsLoading(false)

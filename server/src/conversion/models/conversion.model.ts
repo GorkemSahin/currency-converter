@@ -1,5 +1,5 @@
-const mongoose = require('../../common/services/mongoose.service');
-const Schema = mongoose.Schema;
+import mongoose from '../../common/services/mongoose.service'
+const Schema = mongoose.Schema
 
 const conversionSchema = new Schema({
   date: { type: Date, default: Date.now, index: true },
@@ -7,9 +7,9 @@ const conversionSchema = new Schema({
   to: { type: String, required: true },
   amount: { type: Number, required: true },
   result: { type: Number, required: true },
-  usdResult: { type: Number, required: true }
-});
+  usdResult: { type: Number, required: true },
+})
 
-const Conversion = mongoose.model('Conversion', conversionSchema);
+const Conversion = mongoose.model('Conversion', conversionSchema)
 
-module.exports = Conversion;
+export default Conversion

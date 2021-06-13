@@ -1,14 +1,30 @@
-const {
+import {
   createAndSaveConversion,
   getTotalAmountOfConversions,
   getMostPopularCurrency,
   getNoOfConversions,
-} = require('../repository/conversion.repository')
-const truncate = require('../../common/utils/decimal.utils')
-const { fetchRates } = require('../../common/services/exchange.service')
+} from '../repository/conversion.repository'
+import { truncate } from '../../common/utils/decimal.utils'
+import { getRates } from '../../common/services/exchange.service'
 
-const convert = async ({ from, to, amount }) => {
-  const rates = await fetchRates(from, to)
+interface ConversionQuery {
+  from: string
+  to: string
+  amount: number
+}
+
+export interface Conversion extends ConversionQuery {
+  result: number
+  usdResult: number
+}
+
+interface Statistic {
+  name: string
+  value: number
+}
+
+export const convert = async ({ from, to, amount }: ConversionQuery) => {
+  const rates = await getRates(from, to)
   const conversion = {
     from,
     to,
@@ -19,7 +35,7 @@ const convert = async ({ from, to, amount }) => {
   return await createAndSaveConversion(conversion)
 }
 
-const prepareStatistics = async () => {
+export const prepareStatistics: () => Promise<Statistic[]> = async () => {
   const noOfConversions = await getNoOfConversions()
   const totalAmount = await getTotalAmountOfConversions()
   const mostPopularCurrency = await getMostPopularCurrency()
@@ -32,5 +48,3 @@ const prepareStatistics = async () => {
     { name: 'Most Popular Currency', value: mostPopularCurrency },
   ]
 }
-
-module.exports = { convert, prepareStatistics }

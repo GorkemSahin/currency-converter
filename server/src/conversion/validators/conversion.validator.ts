@@ -1,6 +1,7 @@
-const { body, validationResult } = require('express-validator')
+import { RequestHandler } from 'express'
+import { body, validationResult } from 'express-validator'
 
-const conversionValidationRules = () => {
+export const conversionValidationRules = () => {
   return [
     body('from', 'Specify the source currency.').exists(),
     body('to', 'Specify the destination currency.').exists(),
@@ -8,21 +9,15 @@ const conversionValidationRules = () => {
   ]
 }
 
-const validate = (req, res, next) => {
-  console.log(req)
+export const validate: RequestHandler = (req, res, next) => {
   const errors = validationResult(req)
   if (errors.isEmpty()) {
     return next()
   }
-  const extractedErrors = []
+  const extractedErrors: { [key: string]: string }[] = []
   errors.array().map((err) => extractedErrors.push({ [err.param]: err.msg }))
   next({
     extractedErrors,
     message: 'Validation error. Check your input.',
   })
-}
-
-module.exports = {
-  conversionValidationRules,
-  validate,
 }

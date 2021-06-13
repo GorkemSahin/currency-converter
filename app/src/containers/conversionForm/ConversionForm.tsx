@@ -27,7 +27,7 @@ export default function Converter({
         <Fieldset>
           <Form.Item name="from" rules={[{ required: true }]}>
             <Select placeholder="From" showSearch>
-              <Select.Option value="EUR">EUR</Select.Option>
+              <Select.Option value="EURr">EUR</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item name="amount" rules={[{ required: true }]}>
