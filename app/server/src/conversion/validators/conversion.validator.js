@@ -1,24 +1,25 @@
-const { query, validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator')
 
 const conversionValidationRules = () => {
-  return [ 
-    query('from', 'Specify the source currency.').exists(),
-    query('to', 'Specify the destination currency.').exists(),
-    query('amount', "Please enter a valid amount.").isNumeric()
-  ]  
+  return [
+    body('from', 'Specify the source currency.').exists(),
+    body('to', 'Specify the destination currency.').exists(),
+    body('amount', 'Please enter a valid amount.').isNumeric(),
+  ]
 }
 
 const validate = (req, res, next) => {
-  const errors = validationResult(req);
+  console.log(req)
+  const errors = validationResult(req)
   if (errors.isEmpty()) {
-    return next();
+    return next()
   }
-  const extractedErrors = [];
-  errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }));
+  const extractedErrors = []
+  errors.array().map((err) => extractedErrors.push({ [err.param]: err.msg }))
   next({
     extractedErrors,
-    message: "Validation error. Check your input."
-  });
+    message: 'Validation error. Check your input.',
+  })
 }
 
 module.exports = {

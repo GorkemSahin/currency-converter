@@ -1,7 +1,12 @@
 import React from 'react'
-import 'antd/dist/antd.css'
+import { Typography } from 'antd'
 import { Statistic } from 'types/types'
-import { StatisticItem } from './components/Statistic/Statistic'
+import {
+  StatisticItem,
+  StatisticsGrid,
+  StatisticTitle,
+} from './Statistics.styled'
+const { Text } = Typography
 
 interface Props {
   statistics?: Statistic[]
@@ -9,12 +14,13 @@ interface Props {
 
 export default function Statistics({ statistics }: Props) {
   return (
-    <div>
-      <div>
-        {statistics?.map((s) => (
-          <StatisticItem statistic={s} />
-        ))}
-      </div>
-    </div>
+    <StatisticsGrid>
+      {statistics?.map((s) => (
+        <StatisticItem key={s.name}>
+          <Text>{s.name}</Text>
+          <StatisticTitle level={2}>{s.value}</StatisticTitle>
+        </StatisticItem>
+      ))}
+    </StatisticsGrid>
   )
 }

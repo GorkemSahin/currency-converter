@@ -5,9 +5,9 @@ export const fetchSymbols = async () => {
   return await axiosInstance.get<string[]>(`/conversion/symbols`)
 }
 
-export const fetchConversion = async (query: ConversionQuery) => {
-  return await axiosInstance.get<Conversion>(`/conversion/convert`, {
-    params: query,
+export const postConversion = async (query: ConversionQuery) => {
+  return await axiosInstance.post<Conversion>(`/conversion/convert`, {
+    ...query,
   })
 }
 

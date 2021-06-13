@@ -1,42 +1,51 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import 'antd/dist/antd.css'
-import { Layout, Divider, PageHeader, Button, Space } from 'antd'
-import Converter from '../containers/converter/Converter'
+import { Button, Divider, Space } from 'antd'
+import Converter from '../containers/conversionForm/ConversionForm'
 import Statistics from '../containers/statistics/Statistics'
 import Title from 'antd/lib/typography/Title'
 import { Conversion, ConversionQuery, Statistic } from 'types/types'
-import { fetchConversion, fetchStatistics, fetchSymbols } from 'api'
-const { Content, Footer } = Layout
+import { postConversion, fetchStatistics, fetchSymbols } from 'api'
+import {
+  ContentContainer,
+  ErrorContainer,
+  Footer,
+  Header,
+  Layout,
+} from './App.styled'
 
 export default function App() {
-  const [result, setResult] = useState<Conversion>()
+  const [conversion, setConversion] = useState<Conversion>()
   const [statistics, setStatistics] = useState<Statistic[]>()
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [symbols, setSymbols] = useState<string[]>()
 
   useEffect(() => {
-    const getSymbols = async () => {
+    const getSymbolsAndStats = async () => {
       try {
-        const symbolsData = await fetchSymbols()
-        setSymbols(symbolsData.data)
+        const { data: symbolsData } = await fetchSymbols()
+        const { data: statsData } = await fetchStatistics()
+        setSymbols(symbolsData)
+        setStatistics(statsData)
       } catch (error) {
-        setErrorMessage(error || 'Could not fetch currencies.')
+        setErrorMessage(error.message || 'Could not fetch currencies.')
       }
     }
-    getSymbols()
+    getSymbolsAndStats()
   }, [])
 
   const onConvert = useCallback(async (query: ConversionQuery) => {
     if (query.from && query.to && query.amount) {
       setIsLoading(true)
       try {
-        const { data } = await fetchConversion(query)
-        setResult(data)
+        const { data } = await postConversion(query)
+        setConversion(data)
         const { data: sData } = await fetchStatistics()
         setStatistics(sData)
       } catch (error) {
-        setErrorMessage(error || 'Something went wrong.')
+        console.log({ ...error })
+        setErrorMessage(error.message || 'Something went wrong.')
       } finally {
         setIsLoading(false)
       }
@@ -44,23 +53,26 @@ export default function App() {
   }, [])
 
   return (
-    <Layout >
-      <PageHeader title="CURRENCY CONVERTER" />
+    <Layout>
+      <Header>CURRENCY CONVERTER</Header>
       {errorMessage ? (
-        <div>
+        <ErrorContainer>
           <Space direction="vertical" align="center">
-            <Title level={3}>
-              {errorMessage || 'Please check your internet connection.'}
-            </Title>
+            <Title level={3}>{`Error: ${errorMessage}`}</Title>
             <Button onClick={() => setErrorMessage(null)}>RETRY</Button>
           </Space>
-        </div>
+        </ErrorContainer>
       ) : (
-        <Content>
-          <Converter onConvert={onConvert} result={result} symbols={symbols} isLoading={isLoading} />
-          <Divider></Divider>
+        <ContentContainer>
+          <Converter
+            onConvert={onConvert}
+            conversion={conversion}
+            symbols={symbols}
+            isLoading={isLoading}
+          />
+          <Divider />
           <Statistics statistics={statistics} />
-        </Content>
+        </ContentContainer>
       )}
       <Footer>
         A simple currency converter app developed by Görkem Şahin.
