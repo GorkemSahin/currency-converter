@@ -2,7 +2,7 @@
 
 A small web application I developed using the MERN stack (MongoDB, Express.js, React.js, Node.js). Users can convert from one currency to another and view statistics about the conversions made so far by all users.
 
-## How to Run
+## How to Run (Docker image is not up-to-date...)
 
 If you have Docker, pull the image with the following command…
 
